@@ -6,10 +6,8 @@
 //
 import Foundation
 
-//var system = Bakery()
-// system.login()
-
-
+var system = Bakery()
+system.login()
 
 //func loadUsers() ->[User]{
 //    let file = URL(fileURLWithPath: "users.json")
@@ -41,22 +39,5 @@ import Foundation
 //}
 
 
-func deleteAttendantAccount(){
-    
-}
 
-func checkAttendantAccount(){
-    
-}
-
-func printSalesReport(){
-    
-}
-
-func checkStorage(){
-    
-}
-func makeSale(){
-    
-}
 

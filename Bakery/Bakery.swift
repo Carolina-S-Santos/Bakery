@@ -11,28 +11,25 @@ enum UserType: String, Codable {
     case admin, attendant
 }
 
+enum ProductType {
+    case Pastries, Cakes, Dairy, Bread, Beverages, Ingredients
+}
+
+enum Origin {
+    case Manufactured, Supplied
+}
+
 class Bakery {
     
     var stock : [Products: Int] = [:]
-//    var loggedUser : ?
-    
-//    stock --> dictionary
-    // [funcionarios]
-    // [fornecedores]
-    // loggedUser
-   
-
+    var loggedUser : User 
+    var employees : [User] = []
+    var suppliers : [Supplier] = []
 //    let superAdmin : User =
     var users : [User]
-    var suppliers : [Supplier] = []
 
-    
     init() {
-        users = MockData.users()
-//        stock = [:]
-        
-//        login()
-        
+        users = MockData.users()  
     }
     
     func login(){
@@ -43,7 +40,6 @@ class Bakery {
         print("Enter your username: ")
         var username = readLine()
         
-        //Checa se o usuário já existe
         for user in users {
             if username == user.username {
                 print("Enter your password: ")
@@ -105,24 +101,28 @@ class Bakery {
         var name = readLine()
         
         if let name = name {
-            print("Enter the product type this supplier sells: ")
-            print("Choose an option:")
-            print("1 - Pastries")
-            print("2 - Cakes")
-            print("3 - Dairy")
-            print("4 - Bread")
-            print("5 - Return")
-            
-            var option = readLine()
-            var productType : ProductType = .Bread
-            
-            switch option {
-                case "1": productType = .Pastries
-                case "2": productType = .Cakes
-                case "3": productType = .Dairy
-                case "4": productType = .Bread
-                default: registerSupplier()
+            var productType : [ProductType] = []
+            var isAddingProducts = true
+            while isAddingProducts {
+                print("Enter the product type this supplier sells: ")
+                print("1 - Dairy")
+                print("2 - Beverages")
+                print("3 - Ingredients")
+                print("4 - Finish adding products")
+                
+                var option = readLine()
+                let firstDigit = option?.first
+                
+                
+                switch firstDigit {
+                    case "1": productType.append(.Dairy)
+                    case "2": productType.append(.Beverages)
+                    case "3": productType.append(.Ingredients)
+                    case "4": isAddingProducts = false
+                    default: print("Invalid option. Please try again.")
+                }
             }
+            
             var supplier : Supplier = Supplier(name: name, productType: productType)
             suppliers.append(supplier)
             
@@ -134,50 +134,15 @@ class Bakery {
         
     }
 
-    func createAttendantAccount(){
-        print("Enter attendant's username: ")
-        var username = readLine()
-        var password : String?
-        
-        if let username = username {
-            for user in users{
-                if username == user.username {
-                    print("Username already exists! Choose another username.")
-                    Thread.sleep(forTimeInterval: 3)
-                    createAttendantAccount()
-                    
-                } else {
-                    repeat {
-                        print("Enter a new password for the attendant: ")
-                        
-                        password = readLine()
-                        
-                        if let password = password{
-                            let attendant : User = User(username: username, password: password, userType: .attendant)
-                            users.append(attendant)
-                        } else {
-                            print("Invalid password!")
-                        }
-                    } while password == nil
-                }
-            }
-            
-        } else {
-            print("Invalid username!")
-            Thread.sleep(forTimeInterval: 3)
-            createAttendantAccount()
-        }
+    func buyProduct() {
+        print
     }
-
-
 }
-
 
 struct Products: Hashable {
     var name : String
     var type : ProductType
     var costs : Double
     var price : Double
-    var origin : String
-    
+    var origin : Origin 
 }
