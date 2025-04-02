@@ -6,37 +6,9 @@
 //
 import Foundation
 
-var system = Bakery()
-system.login()
+var system = Bakery( employees: [])
 
-//func loadUsers() ->[User]{
-//    let file = URL(fileURLWithPath: "users.json")
-//    
-//    if let data = try? Data(contentsOf: file){
-//        let decoder = JSONDecoder()
-//        if let loadedUsers = try? decoder.decode([User].self, from: data){
-//            return loadedUsers
-//        }
-//    }
-//    
-//    return []
-//}
-//
-//func saveUser(user: [User]){
-//    var users = loadUsers()
-//    
-//    let encoder = JSONEncoder()
-//    if let data = try? encoder.encode(user){
-//        let file = URL(fileURLWithPath: "users.json")
-//        
-//        do {
-//            try data.write(to: file)
-//            print("User saved succesfully!")
-//        } catch {
-//            print("Error saving user!")
-//        }
-//    }
-//}
+Bakery.login()
 
 
 

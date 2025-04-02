@@ -23,9 +23,8 @@ class User: Codable {
 
 struct MockData {
     static func users() -> [User] {
-        return[
+        return [
             User(username: "superAdmin", password: "12345", userType: UserType.admin),
             User(username: "carlos", password: "12345", userType: UserType.attendant)]
     }
-    //static func ...
 }
