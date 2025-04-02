@@ -135,7 +135,6 @@ class Bakery {
     }
 
     func buyProduct() {
-        print
     }
 }
 
